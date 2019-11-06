@@ -34,4 +34,11 @@ class Carts with ChangeNotifier{
    
     return total;
   }
+  void deleteItem(String title ){
+   
+    carts.removeWhere((test){
+      return test.title==title;
+    });
+     notifyListeners();
+  }
 }

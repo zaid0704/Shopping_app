@@ -58,7 +58,21 @@ class _CartState extends State<Cart> {
               child: ListView.builder(
           itemCount: myCarts.lenght,
           itemBuilder: (ctx,i){
-            return Card(
+            return Dismissible(
+              key: ValueKey(myCarts.item[i].id),
+              onDismissed: (val){
+                myCarts.deleteItem(myCarts.item[i].title);
+              },
+              direction: DismissDirection.endToStart,
+              background: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 7),
+                color: Theme.of(context).errorColor,
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.delete,color: Colors.white,
+                size: 40,),
+              ),
+              
+              child: Card(
               margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 7),
               
               elevation: 6.0,
@@ -73,7 +87,9 @@ class _CartState extends State<Cart> {
                 trailing: Text('x ${myCarts.item[i].quantity}'),
                 subtitle: Text('Total : ${myCarts.item[i].quantity*myCarts.item[i].price}'),
               ),        
+            ),
             );
+            
           },
         ),
 
