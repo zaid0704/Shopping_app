@@ -60,6 +60,35 @@ class _CartState extends State<Cart> {
           itemBuilder: (ctx,i){
             return Dismissible(
               key: ValueKey(myCarts.item[i].id),
+              confirmDismiss: (_){
+                return showDialog(
+                  context: context,
+                  builder: (c){
+                    return AlertDialog(
+                      
+                      title: Text('Are You Sure !'),
+                      content: Text('Do want to delete your item ?'),
+                      elevation: 6.0,
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('yes'),
+                          onPressed: (){
+                            Navigator.of(c).pop(true);
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('no'),
+                          onPressed: (){
+                            Navigator.of(c).pop(false);
+                          },
+                        ),
+                        
+                        
+                      ],
+                    );
+                  }
+                );
+              },
               onDismissed: (val){
                 myCarts.deleteItem(myCarts.item[i].title);
               },

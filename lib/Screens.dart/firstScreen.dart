@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shoping_app/data.dart/products.dart';
 import './overView.dart';
-
+import 'package:provider/provider.dart';
 enum Favs{
   Favorites,
   All
@@ -15,7 +16,9 @@ class frontScreen extends StatefulWidget {
 
 class _frontScreenState extends State<frontScreen> {
   @override
+  
   Widget build(BuildContext context) {
+    final dataFav = Provider.of<MyProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text('Shopping',
@@ -40,16 +43,16 @@ class _frontScreenState extends State<frontScreen> {
             ],
             onSelected: (val){
               
-              // if(val==Favs.Favorites){
-              //    print('Favorites');
-              //   OverView();
-              // }
+              if(val==Favs.Favorites){
+                 print('Favorites');
+                 //dataFav.showFavorites();
+              }
               
-              //  else {
-              //    print('All Items ');
-              //   OverView();
+               else {
+                 print('All Items ');
+               // dataFav.showAll();
                
-              //  }
+               }
                
             },
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:provider/provider.dart';
 import 'package:shoping_app/models.dart/cartItem.dart';
 import '../models.dart/productsModel.dart';
@@ -32,6 +33,22 @@ class _gridViewState extends State<gridView> {
               size: 30,
               ),
               onTap: (){
+                  Scaffold.of(context).hideCurrentSnackBar();
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Added to Cart'),
+                      duration: Duration(
+                        seconds: 2
+                      ),
+                      action: SnackBarAction(
+                        label: 'UNDO',
+                        onPressed: (){
+                          cartsdata.undo(data.title);
+                          print('Pressed');
+                        },
+                      ),
+                    )
+                  );
                 cartsdata.addItem(CartModel(data.id,data.title,data.price));
               },
             ),

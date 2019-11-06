@@ -16,7 +16,7 @@ class Carts with ChangeNotifier{
     }
     else{
     carts.add(newCart);}
-    print(newCart.title);
+    //print(newCart.title);
     notifyListeners();
   }
   int get lenght{
@@ -40,5 +40,26 @@ class Carts with ChangeNotifier{
       return test.title==title;
     });
      notifyListeners();
+  }
+  void undo(String title){
+    print(title);
+    carts.forEach((test){
+      
+      if(test.title==title)
+       {
+         print('Yours undo is $title');
+         if(test.quantity>=2)
+          {
+            test.quantity--;
+          }
+         else if(test.quantity==1)
+           {
+             carts.removeWhere((t){
+               return t.title==test.title;
+             });
+           }
+       }
+    });
+    notifyListeners();
   }
 }
