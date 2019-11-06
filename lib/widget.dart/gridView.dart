@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shoping_app/models.dart/cartItem.dart';
 import '../models.dart/productsModel.dart';
+import '../data.dart/carts.dart';
 class gridView extends StatefulWidget {
   gridView({Key key}) : super(key: key);
 
@@ -11,21 +13,34 @@ class gridView extends StatefulWidget {
 class _gridViewState extends State<gridView> {
   
   Widget build(BuildContext context) {
+    final cartsdata = Provider.of<Carts>(context);
     final data = Provider.of<Product>(context);
     return InkWell(
           onTap: (){
             Navigator.of(context).pushNamed('/detailProduct',arguments: data.id);
           },
-          child: GridTile(
-          
+          child:GridTile(
           child: ClipRRect(child: Image.network('${data.imageUrl}',fit: BoxFit.cover,),
           borderRadius: BorderRadius.circular(15),),
           footer: GridTileBar(
             title: Text('${data.title}',style: TextStyle(fontSize: 10),),
-            backgroundColor: Colors.black54,
-            leading: Icon(Icons.shop),
-            trailing: InkWell(child:data.isFav?Icon(Icons.favorite,color: Colors.orange,):
-            Icon(Icons.favorite_border,color: Colors.redAccent,),
+            backgroundColor: Colors.black87,
+            leading: InkWell(
+              child: Icon(
+              Icons.shopping_cart,
+              color: Colors.red,
+              size: 30,
+              ),
+              onTap: (){
+                cartsdata.addItem(CartModel(data.id,data.title,data.price));
+              },
+            ),
+            trailing: InkWell(child:data.isFav?Icon(Icons.favorite,
+            color: Colors.red,
+            size: 30,
+            ):
+            Icon(Icons.favorite_border,color: Colors.redAccent,
+            size: 30,),
             onTap: (){
               data.toggleFav();
                

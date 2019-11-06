@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shoping_app/Screens.dart/overView.dart';
 import 'package:provider/provider.dart';
-
+import './Screens.dart/firstScreen.dart';
 import './data.dart/products.dart';
 import './Screens.dart/detailProduct.dart';
+import './Screens.dart/cart.dart';
+import './data.dart/carts.dart';
 void main() => runApp(MyApp());
-enum Favs{
-  Favorites,
-  All
-}
+
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
 
@@ -20,8 +19,14 @@ class _MyAppState extends State<MyApp> {
   @override
   bool favs = true;
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (context)=>MyProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+      value:MyProvider(),),
+      ChangeNotifierProvider(
+        builder: (ctx)=> Carts(),
+      )
+      ],
       child: MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.blue,
@@ -30,35 +35,13 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/detailProduct':(context)=>detailProduct(),
+        '/cartScreen':(ctx)=>Cart(),
       },
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Shopping',style: TextStyle(fontFamily: 'Quicksand',fontSize: 20),),
-        actions: <Widget>[
-          PopupMenuButton(
-            icon: Icon(Icons.more_vert),
-            itemBuilder: (_)=>[
-              PopupMenuItem(child: Text('Favorites'),value: Favs.Favorites,),
-              PopupMenuItem(child:Text('All Items'),value: Favs.All,)
-            ],
-            onSelected: (val){
-              if(val==Favs.Favorites){
-                 print('Favorites');
-                 OverView(favs);
-              }
-              
-               else {
-                 print('All Items ');
-                 OverView(!favs);
-               }
-               
-            },
-          ),
-        ],
-        ),
-        body: OverView(!favs),
-      ),
-    ),);
+      home: frontScreen()
+    ),
     
+    ); 
+    
+      
   }
 }

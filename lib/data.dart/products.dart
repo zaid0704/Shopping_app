@@ -9,6 +9,7 @@ final listProducts =[
       price: 29.99,
       imageUrl:
           'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          isFav: false,
     ),
     Product(
       id: 'p2',
@@ -17,6 +18,7 @@ final listProducts =[
       price: 59.99,
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+     isFav: false,
     ),
     Product(
       id: 'p3',
@@ -25,6 +27,7 @@ final listProducts =[
       price: 19.99,
       imageUrl:
           'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
+          isFav:true,
     ),
     Product(
       id: 'p4',
@@ -33,19 +36,28 @@ final listProducts =[
       price: 49.99,
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+     isFav: false,
     ),
   ];
   void addProduct(newProduct){
     listProducts.add(newProduct);
     notifyListeners();
   }
+   bool myFavs = false;
   List<Product> get item{
+    if(myFavs){
+      return listProducts.where((test)=>test.isFav).toList();
+    }
     return [...listProducts];
+    
   }
-  bool myFavs = true;
-  List<Product>   favs(){
-    return listProducts.where((test){
-      return test.isFav ;
-    }).toList();
+ 
+  void showAll(){
+    myFavs = false;
+    notifyListeners();
+  }
+  void showFavorites(){
+    myFavs=true;
+    notifyListeners();
   }
 }

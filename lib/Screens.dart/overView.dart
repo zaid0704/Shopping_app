@@ -6,8 +6,6 @@ import '../models.dart/productsModel.dart';
 import '../widget.dart/gridView.dart';
 class OverView extends StatefulWidget {
   
-  bool favs;
-  OverView(this.favs);
  
   
   @override
@@ -15,15 +13,15 @@ class OverView extends StatefulWidget {
 }
 
 class _OverViewState extends State<OverView> {
+  @override
+  
   
   Widget build(BuildContext context) {
-    setState(() {
-     widget.favs= widget.favs; 
-    });
-    final myData = Provider.of<MyProvider>(context);
     
-    final myListProd =widget.favs? myData.favs():myData.item;
-    print(myData.favs);
+    final myData = Provider.of<MyProvider>(context);
+  
+    final myListProd =myData.item;
+   
     int c =0;
     
     return  GridView(
@@ -35,7 +33,7 @@ class _OverViewState extends State<OverView> {
           );
            }).toList(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        childAspectRatio: 3/2,
+        childAspectRatio: 3/5,
         mainAxisSpacing: 20,
         crossAxisSpacing: 10,
         maxCrossAxisExtent: 200,
