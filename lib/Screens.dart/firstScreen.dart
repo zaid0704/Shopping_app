@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shoping_app/data.dart/products.dart';
 import './overView.dart';
 import 'package:provider/provider.dart';
+import '../Screens.dart/drawer.dart';
 enum Favs{
   Favorites,
   All
@@ -20,6 +21,7 @@ class _frontScreenState extends State<frontScreen> {
   Widget build(BuildContext context) {
     final dataFav = Provider.of<MyProvider>(context);
     return Scaffold(
+        drawer: MyDrawer(),
         appBar: AppBar(
           title: Text('Shopping',
           style: TextStyle(
