@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data.dart/carts.dart';
+import '../data.dart/myOrder.dart';
 class Cart extends StatefulWidget {
   Cart({Key key}) : super(key: key);
 
@@ -13,15 +14,25 @@ class _CartState extends State<Cart> {
   
   Widget build(BuildContext context) {
     final myCarts = Provider.of<Carts>(context);
+    final orderdata = Provider.of<MyOrder>(context);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('Cart'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.done,color: Colors.white,),
               onPressed: (){
-                
+                myCarts.item.forEach((f){
+                  orderdata.addOrder(OrderModel(
+                    title: f.title,
+                    price: f.price,
+                    url: f.imageUrl,
+                    description: f.description
+                  ));
+                });
+                Navigator.of(context).popAndPushNamed('/order');
               },
             )
           ],

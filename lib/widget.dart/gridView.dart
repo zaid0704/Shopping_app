@@ -49,7 +49,12 @@ class _gridViewState extends State<gridView> {
                       ),
                     )
                   );
-                cartsdata.addItem(CartModel(data.id,data.title,data.price));
+                cartsdata.addItem(CartModel(
+                  data.id,
+                  data.title,
+                  data.price,
+                  data.imageUrl,
+                  data.description));
               },
             ),
             trailing: InkWell(child:data.isFav?Icon(Icons.favorite,

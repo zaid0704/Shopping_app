@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "235618179320",
+    "firebase_url": "https://shopping-e430d.firebaseio.com",
+    "project_id": "shopping-e430d",
+    "storage_bucket": "shopping-e430d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235618179320:android:6d7c98892012df3adfc30d",
+        "android_client_info": {
+          "package_name": "com.example.shoping_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235618179320-ogfaqva02gds4t3e7b3u5mfd1i103umn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwUDYzLaKQhJcOmjZEKZCFb4NEEktBOhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235618179320-ogfaqva02gds4t3e7b3u5mfd1i103umn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

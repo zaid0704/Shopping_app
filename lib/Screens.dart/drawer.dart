@@ -25,12 +25,18 @@ class MyDrawer extends StatelessWidget {
           ),
          ListTile(
            title: Text('Manage Products'),
-           trailing: Icon(Icons.add),
+           trailing: Icon(Icons.add,),
+           onTap: (){
+             Navigator.of(context).popAndPushNamed('/ManageProduct');
+           },
          ),
          Divider(),
           ListTile(
            title: Text('My Order '),
            trailing: Icon(Icons.shopping_cart),
+           onTap: (){
+             Navigator.of(context).popAndPushNamed('/order');
+           },
          ),
         ],
       ),

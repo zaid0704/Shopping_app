@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models.dart/productsModel.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 class MyProvider with ChangeNotifier{
 final listProducts =[
     Product(
@@ -39,9 +41,25 @@ final listProducts =[
      isFav: false,
     ),
   ];
-  void addProduct(newProduct){
-    listProducts.add(newProduct);
+  Future<void> addProduct(Product newProduct)async{
+   return  http.post('https://shopping-e430d.firebaseio.com/products.json',
+    body: json.encode({
+      'id':newProduct.id,
+      'title':newProduct.title,
+      'description':newProduct.description,
+      'price':newProduct.price,
+      'isFav':newProduct.isFav
+    }),
+    ).then((onValue){
+      print('Success');
+      listProducts.add(newProduct);
+    print(newProduct.title);
     notifyListeners();
+    }).catchError((onError){
+      print('Error occured');
+      throw onError;
+    });
+    
   }
    bool myFavs = false;
   List<Product> get item{
